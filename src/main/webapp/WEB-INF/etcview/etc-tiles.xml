@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="etcview/json" extends="mainTemplate">
+		<put-attribute name="menu" 
+				value="/WEB-INF/menu/it_menu.jsp"/>
+		<put-attribute name="content" 
+				value="/WEB-INF/etcview/json.jsp"/>
+	</definition>
+	<definition name="etcview/ajax" extends="mainTemplate">
+		<put-attribute name="menu" 
+				value="/WEB-INF/menu/it_menu.jsp"/>
+		<put-attribute name="content" 
+				value="/WEB-INF/etcview/ajax.jsp"/>
+	</definition>
+	<definition name="etcview/ajaxexam" extends="mainTemplate">
+		<put-attribute name="menu" 
+				value="/WEB-INF/menu/it_menu.jsp"/>
+		<put-attribute name="content" 
+				value="/WEB-INF/etcview/ajaxexam.jsp"/>
+	</definition>
+</tiles-definitions>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+	<!-- <resources mapping="/images/**" location="/resources/images/" /> -->
+	<resources mapping="/images/**" location="/WEB-INF/static/images/" />
+	<resources mapping="/common/**" location="/WEB-INF/static/common/" />
+	<resources mapping="/upload/**" location="/WEB-INF/upload/" />
+	<!--================================ 일반jsp만 만들어내는 ViewResolver 등록 ==================================================-->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/" />
+		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="order" value="2"/>
+	</beans:bean>
+	<!--================================ tiles기반으로 화면을 만드는 ViewResolver 등록 =========================================================-->
+	
+	<!-- 1. tiles설정파일을 읽어서 작업할 수 있도록 설정파일을 등록 -->
+	<beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<beans:property name="definitions">
+			<beans:list>
+				<beans:value>/WEB-INF/**/*-tiles.xml</beans:value>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+	<!-- 2. Tiles기반으로 뷰를 만들 수 있도록 ViewResolver를 등록  -->
+	<beans:bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />
+		<beans:property name="order" value="1"/>
+	</beans:bean>
+	
+	
+	<!--================================ DB관련작업 등록 ==================================================-->
+	<!--DriverManager방식 : 커넥션을 요청이 들어올때마다 생성해서 넘겨주는 방식  -->
+	<!-- <beans:bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<beans:property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:xe"/>
+		<beans:property name="username" value="scott"/>
+		<beans:property name="password" value="tiger"/>
+	</beans:bean> -->
+	<!-- DataSource방식 : WAS에 등록된 커넥션풀을 이용해서 작업하는 방식  -->
+	<beans:bean id="ds" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<beans:property name="jndiName" value="jdbc/myspring"/>
+		<beans:property name="resourceRef" value="true"/>
+	</beans:bean>
+	<!-- sql을 실행할 수 있도록 기능을 제공하는 클래스  -->
+	<beans:bean id="template" class="org.springframework.jdbc.core.JdbcTemplate">
+		<beans:constructor-arg ref="ds"/>
+	</beans:bean>
+	<!--================================= mybatis연결 ==============================================================  -->
+	<!-- spring과 mybatis연결클래스(mybatis에서 오라클을 연결)  -->
+	<beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<beans:property name="dataSource" ref="ds"/>
+		<beans:property name="configLocation" value="/WEB-INF/config/mybatis-config.xml"/>
+	</beans:bean>
+	
+	<!-- mybatis의 핵심클래스(sql을 실행하기  위한 메소드를 제공 )-->
+	<beans:bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<beans:constructor-arg ref="sqlSessionFactory"/>
+	</beans:bean>
+	<!-- ================================파일업로드 ===================================================================== -->
+	<beans:bean id="multipartResolver" 
+			class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="4000000"/>
+	</beans:bean>
+	
+	<!-- ================================인터셉터===================================================================== -->
+	
+	<interceptors>
+		<!-- <interceptor>
+			<mapping path="/board/**"/>
+			<mapping path="/emp/mypage/myjob"/>
+			<exclude-mapping path="/board/download/**"/>
+			<beans:bean class="com.multi.erp.etc.TimeCheckInterceptor"/>
+		</interceptor> -->
+		<interceptor>
+			<mapping path="/**"/>
+			
+			<exclude-mapping path="/board/ajax/**"/>
+			<exclude-mapping path="/emp/login.do"/>
+			<exclude-mapping path="/emp/spring/login"/>
+			<exclude-mapping path="/board/list.do"/>
+			<exclude-mapping path="/index.do"/>
+			<exclude-mapping path="/images/**"/>
+			<beans:bean class="com.multi.erp.common.LoginCheckInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
+	
+	<!--================================ 빈을 생성하기 위해 패키지등록 ==================================================-->
+	<context:component-scan base-package="com.multi.springmvc" />
+	<context:component-scan base-package="main"/>
+	<context:component-scan base-package="emp"/>
+	<context:component-scan base-package="com"/>
+	
+	<!--================================ 스프링에서 트랜잭션을 관리하는 핵심클래스를 빈으로 등록================================  -->
+	<!--1. transactionManager객체등록  -->
+	<beans:bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<beans:property name="dataSource" ref="ds"/>
+	</beans:bean>
+	<!--2. Advice등록  -->
+	<!-- Exception이 발생하면 rollback처리를 하겠다는 의미 -->
+	<tx:advice id="txadvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="insert" rollback-for="Exception"/>
+		</tx:attributes>
+	</tx:advice>
+	<!--3. aop처리  -->
+	<aop:config>
+		<aop:pointcut expression="execution(* com.multi.erp.*.*Service*.insert(..))" id="txpointcut"/>
+		<aop:advisor advice-ref="txadvice" pointcut-ref="txpointcut"/>
+	</aop:config>
+	<!-- aop작업을 수행하는 proxy가 자동으로 감지해서 aop등록된 것을 확인하고 실행될 수 있도록 처리  -->
+	<aop:aspectj-autoproxy/>
+</beans:beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

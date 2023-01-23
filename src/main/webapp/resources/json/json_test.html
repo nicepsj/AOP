@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//자바스크립트에서 JSON객체의 표현
+		var person = {
+				"name":"BTS",
+				"age":"25",
+				"subject":["자바","하둡","스프링"],
+				"addr":{
+					"zip": "111-222",
+			 		"addr1": "인천시"
+				},
+				"history":[
+					{
+						"subject":"java",
+						"month":"11"
+					},
+					{
+			 			"subject": "servlet",
+			 			"month": "12"
+			 		}
+				]
+		}
+		alert(person);
+		document.write("<h3>" + person.name + "</h3>");
+		document.write("<h3>" + person.addr + "</h3>");
+		document.write("<h3>" + person.age + "</h3>");
+		document.write("<h3>" + person.subject[1] + "</h3>");
+		document.write("<h3>" + person.addr.addr1 + "</h3>");
+		document.write("<h3>" + person.history[1].subject + "</h3>");
+	</script>
+</body>
+
+
+
+
+
+
+
+</html>

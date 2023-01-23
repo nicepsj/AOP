@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		//jQuery선택자를 연습
+		$(document).ready(function() {
+			//alert("jquery");
+			$("*").css("color","blue");//모든요소
+			$("#tag").on("click", function() {
+				alert("선택자가 tag인경우-태그명");
+				$("p").css("color", "red");
+			});
+			$("#id").on("click", function() {
+				alert("선택자가 id-> #");
+				$("#myid").css("color", "green");
+			});
+			$("#class").on("click", function() {
+				alert("class속성으로 정의-> .");
+				$(".myclass").css("color", "skyblue");
+			});
+			$("#this").on("click", function() {
+				alert("this-현재 작업 중인 객체");
+				$(this).css("color", "orange");
+			});
+			$("#myh3").on("click", function() {
+				alert("myh3");
+				$("div h3").css("color","orange");
+			});
+			$("#pclass").on("click", function() {
+				alert("p태그 내부에 myclass라는 클래스속성이 정의된 엘리먼트(태그)들만 작업");
+				$("p.myclass").css("color","black");
+			});
+			$("#firstP").on("click", function() {
+				alert("firstP");
+				$("p:first").css("color","pink");
+			});
+		})
+	</script>
+	<div id="btns">
+		<input type="button" value="태그" name="btn" id="tag" /> 
+		<input type="button" value="id명" name="btn" id="id" /> 
+		<input	type="button" value="class명" name="btn" id="class" /> 
+		<input type="button" value="this" name="btn" id="this" /> 
+		<input type="button" value="div안의 h3" name="btn" id="myh3" /> 
+		<input type="button" value="p요소에 정의된 클래스만" name="btn" id="pclass" /> 
+		<input	type="button" value="처음만나는 p" name="btn" id="firstP" />
+		<input	type="button" value="처음만나는 p" name="btn" id="firstP" />
+		<input	type="button" value="처음만나는 p" name="btn" id="firstP" />
+	</div>
+	<div>
+		<h2 id="myid">지금은 연습중..(id로 정의된 요소)</h2>
+		<h3>지금은 연습중..(div태그 안의 h3)</h3>
+	</div>
+	<div>
+		<h2 id="myid">지금은 연습중..(id로 정의된 요소)</h2>
+		<h3>지금은 연습중..(div태그 안의 h3)</h3>
+	</div>
+	<p>선택자의 종류를 보고 있습니다.(그냥 p)</p>
+	<h3>여기도 h3이 있어요(그냥 h3태그)</h3>
+	<span class="myclass">span태그입니다.(myclass클래스명으로 정의)</span>
+	
+	<p>클래스 선택자를 적용할 문자열1(그냥 p)</p>
+	<p class="myclass">클래스 선택자를 적용할 문자열2(그냥 p - myclass클래스명으로 정의)</p>
+	<p>클래스 선택자를 적용할 문자열3(그냥 p)</p>
+	<p>클래스 선택자를 적용할 문자열4(그냥 p)</p>
+	<p class="myclass">클래스 선택자를 적용할 문자열5(그냥 p - myclass클래스명으로 정의)</p>
+	
+	
+</body>
+</html>
+
+
+
+

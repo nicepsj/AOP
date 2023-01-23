@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+	<p>jQuery값 설정하기</p>
+	<p>양식태그에서 발생하는 값, 문서의 값</p>
+	<div id="test">jQuery연습하기</div>
+	<div id="result"></div>
+	<div id="result2"></div>
+	<form>
+		<input type="number" id="data">
+		<input type="number" id="data2">
+		<input type="button" id="btn" value="값가져오기">
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#test").css({"color":"blue","border":"solid 1px red"});
+				$("p").hide();
+				$("#result").text("<h1>div에 값 설정하기 - 텍스트를 자바스크립트로 추가</h1>");
+				$("#data").on("keyup",function(){
+					//id가 data인 input에 데이터가 입력될때마다 호출
+					//myval = $("#result").text();
+					//alert(myval);
+					myval = parseInt($("#data").val())+1000;//getter
+					$("#result2").text(myval);//setter
+				});
+				
+				$("#btn").on("click",function(){
+					textVal = 	$("#result2").text();//getter
+					$("#data2").val(textVal);//setter
+				})
+			})
+		
+		</script>
+	</form>
+</body>
+</html>

@@ -1,0 +1,59 @@
+1. pom.xml에 라이브러리를 추가
+   https://mvnrepository.com/에 검색
+2. spring-config.xml에 추가한 라이브러리에서 사용할 빈을 등록 
+3. 각각의 jsp파일을 저장할 수 있는 폴더에 뷰를 생성하기(수정)
+4. 각각의 폴더에 있는 XXX-tiles.xml파일에 뷰 정보를 추가하기
+   (화면구조가 달라지면 템플릿을 추가하고 작업)
+5. 모든 요청이 스프링MVC내부에서 동작해야 하므로
+   뷰를 response하는 메소드를 컨트롤러에 추가하기(뷰만 response하는 요청은 view-config.xml에 등록가능)
+   
+6. 뷰에서 요청하는 부분을 처리할 수 있도록 컨트롤러를 만들고 메소드를 추가
+7. 서비스의 메소드를 구현
+8. DAO의메소드를 구현
+9. mapper에 sql등록
+10. mybatis-config.xml에 mapper와 dto를 등록      
+
+
+[파일업로드]
+HTML폼의 전송방식
+ 1) application/x-www-form-urlencoded
+    - html에서 폼 데이터를 서버로 전송하기 위한 가장 기본적인 방법
+    - 기존의 사용했던 방식
+    - 폼에 입력한 내용을 name=value&name=value....이런 방법으로 전송
+ 2) multipart/form-data
+    - 파일업로드를 하기 위해 텍스트와 바이너리데이터를 같이 전송할 수 있어야 한다.
+    - 다른 형식의 폼데이터와 첨부파일 데이터를 동시에 전송할 수 있는 형식 
+    - <form>태그의 enctype속성에 설정
+    - method는 post로 설정
+    
+    
+MultipartFile
+- multipart/form-data를 이용하는 경우 DispatcherServlet내부에서 "multipartResolver"로 등록된 빈을 찾아 실행하기 때문에 빈의 id명이 틀리면 동작하지 않는다.    
+1. DTO변경
+   - 첨부파일이 저장되어야 하므로 DTO에 컬럼을 추가
+   - boardfiledto생성
+
+2. 컨트롤러수정
+   - 서버에 배포되는 context에 저장될 수 있도록 처리
+   1) dto에서 MultipartFile객체들을 추출
+   2) 파일업로드 서비스로 전달해서 실제 파일이 전송되도록 처리
+   3) BoardService로 보내서 디비에 저장되도록 
+   
+3. 서비스수정(BoardService)
+   - DAO를 호출하는 서비스 
+4. 파일업로드 기능을 수행하는 서비스를 작성
+   - 실제 서버에 저장되도록 
+   
+5. DAO수정
+
+
+
+
+
+
+
+
+
+
+
+

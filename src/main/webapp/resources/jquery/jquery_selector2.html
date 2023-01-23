@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id="btns">
+		<input type="button" value="처음만나는 ul요소의 첫번째 li" name="btn" id="ultag" /> 
+		<input type="button" value="모든 ul의 첫번째 li" name="btn" id="ulAll" /> 
+		<input	type="button" value="href속성이 있는 요소" name="btn" id="href" /> 
+		<input type="button" value="특정태그의 속성값" name="btn" id="attrVal" /> 
+		<input type="button" value="모든 button" name="btn" id="inputbutton" /> 
+		<input type="button" value="모든 짝수<tr>" name="btn" id="treven" /> 
+		<input	type="button" value="모든 홀수<tr>" name="btn" id="trodd" />
+		<input	type="button" value="div바로 아래 a자식" name="btn" id="divchild" />
+		<button>나도 버튼</button>
+	</div>
+	<ul>
+		<li>순서가 없는 목록1-1</li>
+		<li>순서가 없는 목록1-2</li>
+		<li>순서가 없는 목록1-3</li>
+		<li>순서가 없는 목록1-4</li>
+		<li>순서가 없는 목록1-5</li>
+	</ul>
+	<ul>
+		<li>순서가 없는 목록2-1</li>
+		<li>순서가 없는 목록2-2</li>
+		<li id="test">순서가 없는 목록2-3</li>
+		<li>순서가 없는 목록2-4</li>
+		<li>순서가 없는 목록2-5</li>
+	</ul>
+	
+	
+	<div>
+		<a>a태그1 - 첫번째 div</a><br/>
+		<a>a태그2 - 첫번째 div</a><br/>
+		<a>a태그2 - 첫번째 div</a><br/>
+	</div>
+	
+	<div>
+		<a>a태그1 - 두번째 div</a><br/>
+		<a>a태그2 - 두번째 div</a><br/>
+		<a>a태그2 - 두번째 div</a><br/>
+		<p><a>p안의 a</a></p>
+	</div>
+	<a>그냥 p</a><br/>
+	
+	<table border="1">
+		<tr>
+			<td>순서</td><td>선택자명</td><td>설명</td>
+		</tr>
+		<tr>
+			<td>1</td><td>태그명</td><td>정의된 태그에 적용</td>
+		</tr>
+		<tr>
+			<td>2</td><td>id</td><td>정의된 id에 적용</td>
+		</tr>
+		<tr>
+			<td>3</td><td>class명</td><td>정의된 class에 적용</td>
+		</tr>
+
+	</table>
+	<a href="#" target="_self">하이퍼링크1</a>
+	<a href="#" target="_self">하이퍼링크2</a>
+	<a href="#" target="_blank">하이퍼링크3</a>
+	<a href="#" target="_self">하이퍼링크4</a>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#ultag").on("click", function() {
+				$("ul li:first").css("color", "red");
+			});
+			$("#ulAll").on("click", function() {
+				$("ul li:first-child").css("color", "green");
+			});
+			$("#href").on("click", function() {
+				$("[href]").css("color", "skyblue");
+			});
+			$("#attrVal").on("click", function() {
+				//$("a[target='_blank']").css("color", "yellow");
+				$("a[target!='_blank']").css("color", "orange");
+			});
+			
+			$("#inputbutton").on("click", function() {
+				//$(":input태그의 type속성")=> <input>태그의 type속성이 button인것과 HTML5요소도 적용
+				$(":button").css("color", "pink");
+			});
+		});
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

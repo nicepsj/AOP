@@ -1,0 +1,37 @@
+@CHARSET "EUC-KR";
+
+#banner-wrapper {
+	margin-top: 50px;
+	margin-left: 30px;
+	margin-right: 30px;
+}
+
+table{
+	border-collapse: collapse;
+	
+}
+/* td{
+	font-size: 9pt;
+	border-top-style:solid;
+	border-top-color: #dedddf;
+	border-top-width: 1px;
+	height: 40px;
+	border-bottom-color: #dedddf;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+} */
+
+th{
+	background-color: #dedddf;
+	
+}
+ .boardContent{
+	width: 200px;
+	height: 30px;
+ }
+ .boardDate{
+	width: 100px;height: 30px
+ }
+.boardContent:HOVER {
+	color: #63cde7
+}

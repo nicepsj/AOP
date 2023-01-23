@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+/*
+ 
+//요소의 뒤와 요소의 끝은 요소안과 밖의 차이
+append()->선택된 요소의 last child노드를 추가
+prepend()->선택된 요소의 first child노드로 추가
+after()->선택된 요소의 뒤에 새로운 형제 노드로 추가
+before()->선택된 요소의 앞에 새로운 형제노드로 추가
+remove()-> 선택된 요소와 그 자식 요소를 삭제
+empty()->선택된 요소의 자식요소 삭제
+*/	
+data = $("<p>dom액세스 테스트</p>");
+	$(document).ready(function() {
+		$("#append").on("click",function(){
+			
+			$("#btns").append(data);
+		});
+		$("#after").on("click",function(){
+			$("#btns").after(data);
+		});
+		$("#prepend").on("click",function(){
+			$("#btns").prepend(data);
+		});
+		$("#before").on("click",function(){
+			$("#btns").before(data);
+		});
+		$("#remove").on("click",function(){
+			$("#btns").remove();
+		});
+		$("#empty").on("click",function(){
+			$("#btns").empty();
+		});
+	})
+	
+</script>
+</head>
+<body>
+	<div id="main">
+		<h1 id="myhead">안녕하세요 DOM에 관한 작업을 수행 중입니다.</h1>
+		<div id="mycontent1"><img src="../images/m_garden07.jpg" name="myimg" id="myimagId"
+				alt="이미지파일" /><h3>이미지파일</h3></div>
+		<div id="mycontent2">DOM의 구조를 볼까~~</div>
+		<div id="domtestbtn">
+			<form id="myformId" name="myform">	
+				<input type="text" id="test"/>
+				<div id="btns" style="border: solid 1px blue">	
+					<input type="button" value="append"
+						 name="btn" id="append" />
+					<input type="button" value="prepend"
+						 name="btn" id="prepend" />
+						 
+					<input type="button" value="after"
+						 name="btn" id="after" />
+					<input type="button" value="before"
+						 name="btn" id="before" />
+				
+					<input type="button" value="remove"
+						 name="btn" id="remove" />
+					<input type="button" value=empty
+						 name="btn" id="empty" />
+				</div>
+				<input type="text" id="test"/>
+			</form>
+			
+		</div>
+	</div>
+	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

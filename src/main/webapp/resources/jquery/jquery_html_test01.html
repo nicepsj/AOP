@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+	<div class="test1">jquery~~~</div>
+	<div class="test2">jquery~~~~</div>
+	<div id="test3">jquery~~~~</div>
+	<div id="test4">jquery~~~~</div>
+	<div id="test5">jquery~~~~</div>
+	<p>jquery연습중..</p>
+	<a id="attrtest">하이퍼링크</a>
+	<a id="attrtest2">하이퍼링크</a>
+	<div id="result" style="color: blue" class="myclss"></div>
+	<form action="">
+		<input type="button" id="htmlbtn" value="HTML태그 추가하기"/>
+		<input type="button" id="attrbtn" value="속성추가하기"/>
+	</form>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$("#htmlbtn").on("click",function(){
+			$("#result").html("<h1>추가되는 문자열</h1>");
+		})
+		$("#attrbtn").on("click",function(){
+			$("#attrtest").attr("href","https://www.naver.com");
+			alert($("#result").attr("class"));//id가 result인 div태그의 id속성을 alert으로 출력하기
+			$("#attrtest2").attr({
+							"href":"https://www.daum.net",
+							"target":"_blank"
+						})//end attr
+		});
+	})
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

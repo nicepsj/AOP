@@ -1,0 +1,15 @@
+Ajax(Asynchronous Javascript and XML)
+  - XMLHttpRequest라는 객체를 이용해서 비동기통신
+  
+  
+1. $.ajax()를 이용해서 ajax통신  
+   - jQuery의 메소드를 정의할 때 매개변수를 설정하는 방법은 json표기법으로 정의
+   
+   [매개변수]
+   url : ajax로 요청할 path
+   type : 요청방식 - get or post
+   data : 서버로 전송할 데이터 - 서버로 보내서 처리할 데이터가 여러 개이면 json의 형식으로 처리
+   dataType : ajax처리 결과에 대한 타입 -text,json
+   success : 서버와 통신이 성공했을때 호출되는 함수
+   error : 서버와의 통신이 실패했을때 호출되는 함수
+   
